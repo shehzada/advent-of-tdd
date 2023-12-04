@@ -2,6 +2,9 @@ package org.advent.day1;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
@@ -81,5 +84,14 @@ public class TestElfShould {
         Elf elf = new Elf();
         elf.addCalories(10000);
         assertThat(elf.getTotalCalories(), equalTo(10000));
+    }
+
+    @Test
+    void read_cals_from_inout_file(){
+        Elf elf = new Elf();
+        List<Elf> elves = elf.getTotalCaloriesPerElfFromInput();
+        Elf elfMax = elves.stream().max(Comparator.comparingInt(Elf::getTotalCalories)).orElse(elf);
+        assertThat(elfMax.getTotalCalories(), equalTo(24000));
+
     }
 }
